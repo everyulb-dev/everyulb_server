@@ -1,5 +1,7 @@
 from django.db import models
+from django.db.models import DO_NOTHING
 
+from profiles import models as profile_model
 # Create your models here.
 # Customers
 # Customers: customers has many profiles
@@ -13,12 +15,14 @@ class Customer(models.Model):
     website = models.URLField(max_length=10)
     bio = models.CharField(max_length=1000)
     legal_name = models.CharField(max_length=1000)
-
+    point_of_contact = models.OneToOneField(profile_model.Profile,on_delete=DO_NOTHING)
     # has many projects
     # has many vendors
     # vendors =
     # has many employees
     # employees =
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name

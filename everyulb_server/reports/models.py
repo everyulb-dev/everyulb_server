@@ -7,5 +7,8 @@ class Report(models.Model):
 	# belongs to a Reportcollection
 	project = models.ForeignKey(reportcollections_model.Reportcollection,on_delete=models.CASCADE)
 
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
 	def __str__(self):
 		return self.name
