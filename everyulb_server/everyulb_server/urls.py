@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api/v1/customers/', include(('customers.api.endpoints', 'customers'), namespace='customers')),
     url(r'^api/v1/projects/', include(('projects.api.endpoints', 'projects'), namespace='projects')),
+    url(r'^api/v1/components/', include(('components.api.endpoints', 'components'), namespace='components')),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
