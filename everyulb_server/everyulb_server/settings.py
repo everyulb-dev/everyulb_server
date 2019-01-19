@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'everyulb_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ulb2',
+        'NAME': 'ulb3',
         'USER': 'ulbuser',
         'PASSWORD': 'asdfasdf',
         'HOST': 'localhost',
