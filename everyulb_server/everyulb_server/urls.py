@@ -26,6 +26,13 @@ urlpatterns = [
     url(r'^api/v1/customers/', include(('customers.api.endpoints', 'customers'), namespace='customers')),
     url(r'^api/v1/projects/', include(('projects.api.endpoints', 'projects'), namespace='projects')),
     url(r'^api/v1/components/', include(('components.api.endpoints', 'components'), namespace='components')),
+    url(r'^api/v1/maps/', include(('maps.api.endpoints', 'maps'), namespace='maps')),
+    url(r'^api/v1/profiles/', include(('profiles.api.endpoints', 'profiles'), namespace='profiles')),
+    url(r'^api/v1/reportcollections/', include(('reportcollections.api.endpoints', 'reportcollections'), namespace='reportcollections')),
+    url(r'^api/v1/reports/', include(('reports.api.endpoints', 'reports'), namespace='reports')),
+    url(r'^api/v1/tasks/', include(('tasks.api.endpoints', 'tasks'), namespace='tasks')),
+    url(r'^api/v1/vendors/', include(('vendors.api.endpoints', 'vendors'), namespace='vendors')),
+    url(r'^api/v1/warehouse/', include(('warehouse.api.endpoints', 'warehouse'), namespace='warehouse')),
 
 ]
 if settings.DEBUG:

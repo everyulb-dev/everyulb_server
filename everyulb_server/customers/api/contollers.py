@@ -15,6 +15,12 @@ class RetrieveUpdateDestroyCustomer(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
+class RetriveCustomeProjet():
+    # inline serialer
+    pass
+
+
+
 
 # Ignore this below.
 # class ListCreateCustomers(APIView):
