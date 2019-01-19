@@ -13,6 +13,17 @@ class Task(models.Model):
     created_by = models.ForeignKey(profile_model.Profile,on_delete=DO_NOTHING,related_name='created_by')
     assigned_to = models.ForeignKey(profile_model.Profile, on_delete=DO_NOTHING,related_name='assigned_to')
 
+    # status = (wip, completed, cancelled)
+
+    # Status
+    # Work in progress
+    # Completed
+    # Deffered
+    # Delayed
+    # Waiting
+    # for
+    # Cancelled
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

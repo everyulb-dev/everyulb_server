@@ -3,17 +3,17 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from ..models import Customer
-from .serializer import CustomerSerializer
+from ..models import Project
+from .serializer import ProjectSerializer
 from rest_framework import generics
 
-class ListCreateCustomers(generics.ListCreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+class ListCreateProject(generics.ListCreateAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
-class RetrieveUpdateDestroyCustomer(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+class RetrieveUpdateDestroyProject(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
 
 
 # Ignore this below.

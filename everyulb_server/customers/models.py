@@ -12,10 +12,10 @@ class Customer(models.Model):
     logo = models.ImageField(upload_to='logos/')
     brand_primary_color = models.CharField(max_length=10)
     brand_secondry_color = models.CharField(max_length=10)
-    website = models.URLField(max_length=10)
+    website = models.URLField(max_length=2000)
     bio = models.CharField(max_length=1000)
     legal_name = models.CharField(max_length=1000)
-    point_of_contact = models.OneToOneField(profile_model.Profile,on_delete=DO_NOTHING)
+    point_of_contact = models.OneToOneField(profile_model.Profile,on_delete=DO_NOTHING, unique= False)
     # has many projects
     # has many vendors
     # vendors =
