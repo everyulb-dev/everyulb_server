@@ -1,6 +1,8 @@
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from reports import models as report_model
+from django.utils.timezone import now
+
 # Create your models here.
 class Component(models.Model):
     # belongs to report
@@ -27,6 +29,7 @@ class Component(models.Model):
         default='planning',
     )
 
+    due_date = models.DateTimeField(default=now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

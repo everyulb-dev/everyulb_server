@@ -7,6 +7,9 @@ from ..models import Component
 from .serializer import ComponentSerializer
 from rest_framework import generics
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 class ListCreateComponent(generics.ListCreateAPIView):
     queryset = Component.objects.all()
     serializer_class = ComponentSerializer
@@ -14,7 +17,6 @@ class ListCreateComponent(generics.ListCreateAPIView):
 class RetrieveUpdateDestroyComponent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Component.objects.all()
     serializer_class = ComponentSerializer
-
 
 
 # Ignore this below.

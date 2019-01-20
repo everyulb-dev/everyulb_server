@@ -10,8 +10,11 @@ class Task(models.Model):
     component = models.ForeignKey(components_models.Component,on_delete=models.CASCADE)
     due_date = models.DateTimeField(default=now)
 
+    status = models.BooleanField(default=False)
+
     created_by = models.ForeignKey(profile_model.Profile,on_delete=DO_NOTHING,related_name='created_by')
     assigned_to = models.ForeignKey(profile_model.Profile, on_delete=DO_NOTHING,related_name='assigned_to')
+
 
     # status = (wip, completed, cancelled)
 
