@@ -7,8 +7,12 @@ from ..models import Component
 from .serializer import ComponentSerializer
 from rest_framework import generics
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from projects.api.serializer import ProjectSerializer
+from reports.api.serializer import ReportSerializer
+from reportcollections.api.serializer import ReportcollectionSerializer
+from reports.models import Report
+from reportcollections.models import Reportcollection
+from projects.models import Project
 
 class ListCreateComponent(generics.ListCreateAPIView):
     queryset = Component.objects.all()
@@ -17,6 +21,33 @@ class ListCreateComponent(generics.ListCreateAPIView):
 class RetrieveUpdateDestroyComponent(generics.RetrieveUpdateDestroyAPIView):
     queryset = Component.objects.all()
     serializer_class = ComponentSerializer
+
+class GetProjectComponent(APIView):
+    def get(self, request, format=None):
+        try:
+            components = Component.objects.all()
+
+            project_components_json = {}
+            project_component_json = []
+
+            for component in components:
+                report = Report.objects.get(pk=component.report_id)
+                report_collection = Reportcollection.objects.get(pk=report.project_id)
+                project = Project.objects.get(pk=report_collection.project_id)
+
+                temp_json = ComponentSerializer(component).data
+                temp_json.update({
+                    'project' : ProjectSerializer(project).data
+                })
+                project_component_json.append(temp_json)
+
+            project_components_json.update({'project_components' : project_component_json})
+
+            return Response(project_components_json)
+        except Component.DoesNotExist:
+            return Response({
+                'project_components' : []
+            })
 
 
 # Ignore this below.

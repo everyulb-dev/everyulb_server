@@ -13,6 +13,7 @@ class ComponentSerializer(serializers.ModelSerializer):
             'amount_allocated',
             'amount_used',
             'data',
+            'due_date',
             'created_at',
             'updated_at',
         )
