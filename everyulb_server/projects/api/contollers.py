@@ -55,10 +55,11 @@ class GetProjectDetails(APIView):
                 # for report in reports:
                 component = Component.objects.get(report_id=report.id)
 
-                # Just once. Need to confirm how to know location name.
-                # This is one-to-many relationship with report.
                 maps = Map.objects.get(report_id=report.id)
-                temp_json.update({"location" : maps.name})
+                temp_json.update({
+                    "longitude" : maps.longitude,
+                    "latitude" : maps.latitude
+                    })
 
                 # for component in components:
                 task = Task.objects.get(component_id=component.id)
