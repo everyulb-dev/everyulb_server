@@ -47,31 +47,42 @@ class GetProjectDetails(APIView):
                 project_type = ProjectType.objects.get(pk=project.type_id)
                 temp_json.update({"type" : project_type.name})
 
-                reportcollection = Reportcollection.objects.get(project_id=project.id)
+                reportcollections = Reportcollection.objects.filter(project_id=project.id)
 
-                # for reportcollection in reportcollections:
-                report = Report.objects.get(project_id=reportcollection.id)
+                for reportcollection in reportcollections:
+                    reports = Report.objects.filter(project_id=reportcollection.id)
 
-                # for report in reports:
-                component = Component.objects.get(report_id=report.id)
+                    for report in reports:
+                        components = Component.objects.filter(report_id=report.id)
 
-                maps = Map.objects.get(report_id=report.id)
-                temp_json.update({
-                    "longitude" : maps.longitude,
-                    "latitude" : maps.latitude
-                    })
+                        maps = Map.objects.filter(report_id=report.id)
+                        temp_map_list = []
 
-                # for component in components:
-                task = Task.objects.get(component_id=component.id)
+                        for map in maps:
+                            coordinates = {"longitude": map.longitude,
+                                            "latitude": map.latitude}
+                            temp_map_list.append(coordinates)
 
-                profile = Profile.objects.get(pk=task.assigned_to_id)
-                task_assigned_to = profile.user.username
-                # for task in tasks:
-                # if task.assigned_to not in task_assigned_to:
-                #     task_assigned_to.append(task.assigned_to)
-                temp_json.update({"assigned_to" : task_assigned_to})
+                        temp_json.update({
+                            "maps" : temp_map_list
+                        })
 
-                project_details_list.append(temp_json)
+                        for component in components:
+                            tasks = Task.objects.filter(component_id=component.id)
+
+
+                            task_assigned_to = []
+                            for task in tasks:
+                                profiles = Profile.objects.filter(pk=task.assigned_to_id)
+                                for profile in profiles:
+                                    if profile.user.username not in task_assigned_to:
+                                        task_assigned_to.append(profile.user.username)
+                            temp_json.update({
+                                "profile" :
+                                    {"assigned_to" : task_assigned_to}
+                                })
+
+                            project_details_list.append(temp_json)
 
             project_details_json.update({"Project Details" : project_details_list})
             return Response(project_details_json)
