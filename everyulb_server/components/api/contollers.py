@@ -10,9 +10,11 @@ from rest_framework import generics
 from projects.api.serializer import ProjectSerializer
 from reports.api.serializer import ReportSerializer
 from reportcollections.api.serializer import ReportcollectionSerializer
+from tasks.api.serializer import TaskSerializer
 from reports.models import Report
 from reportcollections.models import Reportcollection
 from projects.models import Project
+from tasks.models import Task
 
 class ListCreateComponent(generics.ListCreateAPIView):
     queryset = Component.objects.all()
@@ -49,6 +51,27 @@ class GetProjectComponent(APIView):
                 'project_components' : []
             })
 
+class GetComponentTasks(APIView):
+    def get(self, request, pk, format=None):
+        try:
+            tasks = Task.objects.filter(component_id=pk)
+
+            component_tasks_json = {}
+            component_tasks_list = []
+
+            for task in tasks:
+                component_tasks_list.append(TaskSerializer(task).data)
+
+            component_tasks_json.update({
+                "Tasks" : component_tasks_list
+            })
+
+            return Response(component_tasks_json)
+
+        except Task.DoesNotExist:
+            return Response({
+                "Tasks" : []
+            })
 
 # Ignore this below.
 # class ListCreateCustomers(APIView):

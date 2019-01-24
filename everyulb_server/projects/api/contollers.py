@@ -90,6 +90,76 @@ class GetProjectDetails(APIView):
             return Response({"Project Details" : []})
 
 
+class GetProjectProgress(APIView):
+    def get(self, request, pk, format=None):
+        try:
+            project_progress_json = {}
+            project_progress_list = []
+
+            # https://stackoverflow.com/questions/32876275/request-multiple-ids-from-django-rest-framework-api
+            milestone = request.query_params.get('milestone', 0)
+            milestone = int(milestone)
+
+            reportcollections = Reportcollection.objects.filter(project_id=pk)
+
+            for reportcollection in reportcollections:
+
+                reports = Report.objects.filter(project_id=reportcollection.id)
+
+                for report in reports:
+                    if milestone == 1:
+                        components = Component.objects.filter(
+                                        report_id=report.id,
+                                        is_milestone=True)
+                    else:
+                        components = Component.objects.filter(
+                            report_id=report.id)
+
+                    for component in components:
+
+                        temp_json = {}
+
+                        component_temp_json = ComponentSerializer(component).data
+
+                        total_tasks = Task.objects.filter(component_id=component.id).count()
+                        completed_tasks = Task.objects.filter(
+                                            component_id=component.id,
+                                            status=True).count()
+                        component_status = False
+                        if total_tasks == completed_tasks:
+                            component_status = True
+
+                        component_temp_json.update({"component_status" : component_status})
+                        temp_json.update({
+                            "Components": component_temp_json,
+                            "Tasks" : {
+                                "total_tasks" : total_tasks,
+                                "completed_tasks" : completed_tasks,
+                            },
+                        })
+
+                        project_progress_list.append(temp_json)
+
+            if project_progress_list:
+                project_progress_json.update({
+                    "project_progress" : project_progress_list
+                })
+            else:
+                project_progress_json.update({
+                    "project_progress" : {
+                        "Components" : [],
+                        "Tasks" : []}
+                })
+            return Response(project_progress_json)
+
+        except Reportcollection.DoesNotExist:
+            Response({
+                "project_progress" : {
+                    "Componenets" : [],
+                    "Tasks" : []}
+            })
+
+
 # Ignore this below.
 # class ListCreateCustomers(APIView):
 #     def get(self,request,format=None):
