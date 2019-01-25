@@ -115,4 +115,5 @@ REST_FRAMEWORK = {
     ]
 }
 # ref: https://pypi.org/project/django-cors-headers/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
