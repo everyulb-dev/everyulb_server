@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG') # False if not in os.environ
-ALLOWED_HOSTS = ['68.183.88.169']
+ALLOWED_HOSTS = ['68.183.88.169','159.89.160.209']
 WSGI_APPLICATION = 'everyulb_server.wsgi.application'
 ROOT_URLCONF = 'everyulb_server.urls'
 LANGUAGE_CODE = 'en-us'
