@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'vendors',
     'customers',
     'profiles',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -111,9 +112,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'
     ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ]
 }
 # ref: https://pypi.org/project/django-cors-headers/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
+#for custom user extended using abstractuser
+AUTH_USER_MODEL = 'users.CustomUser'

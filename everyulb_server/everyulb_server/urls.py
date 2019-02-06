@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^api/v1/tasks/', include(('tasks.api.endpoints', 'tasks'), namespace='tasks')),
     url(r'^api/v1/vendors/', include(('vendors.api.endpoints', 'vendors'), namespace='vendors')),
     url(r'^api/v1/warehouse/', include(('warehouse.api.endpoints', 'warehouse'), namespace='warehouse')),
+    url(r'^api/v1/users/', include(('users.api.endpoints', 'users'), namespace='custom_users')),
 
 ]
 if settings.DEBUG:
