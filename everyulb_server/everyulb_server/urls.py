@@ -17,12 +17,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
-
+from rest_framework_jwt.views import refresh_jwt_token
 from everyulb_server import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
+
+    url(r'^api/v1/auth/', include('rest_auth.urls')),
+    url(r'^api/v1/auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^api/v1/auth/token-refresh/', refresh_jwt_token),
+
+
     url(r'^api/v1/customers/', include(('customers.api.endpoints', 'customers'), namespace='customers')),
     url(r'^api/v1/projects/', include(('projects.api.endpoints', 'projects'), namespace='projects')),
     url(r'^api/v1/components/', include(('components.api.endpoints', 'components'), namespace='components')),
