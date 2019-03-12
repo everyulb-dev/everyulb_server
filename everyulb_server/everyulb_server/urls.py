@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^api/v1/vendors/', include(('vendors.api.endpoints', 'vendors'), namespace='vendors')),
     url(r'^api/v1/warehouse/', include(('warehouse.api.endpoints', 'warehouse'), namespace='warehouse')),
     url(r'^api/v1/s3_upload/', include(('s3_upload.api.endpoints', 's3_upload'), namespace='s3_upload')),
+    url(r'^api/v1/utilities/', include(('utilities.api.endpoints', 'utilities'), namespace='utilities')),
 
 ]
 if settings.DEBUG:

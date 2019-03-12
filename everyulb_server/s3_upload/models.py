@@ -15,4 +15,4 @@ class Upload(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.filename
+        return self.name

@@ -54,6 +54,7 @@ ULB_APPS = [
     'customers',
     'profiles',
     's3_upload',
+    'utilities',
 ]
 THIRDPARTY_APPS = [
     'corsheaders',
