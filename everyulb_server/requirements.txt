@@ -16,7 +16,7 @@ django-filter==2.0.0
 django-oauth-toolkit==1.2.0
 django-rest-auth==0.9.3
 django-unixtimestampfield==0.3.9
-djangorestframework==3.9.0
+djangorestframework==3.9.1
 djangorestframework-jwt==1.11.0
 docutils==0.14
 drf-extensions==0.4.0
